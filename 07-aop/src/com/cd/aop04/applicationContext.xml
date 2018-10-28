@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--注册目标对象-->
+    <bean id="someService" class="com.cd.aop04.SomeServiceImpl"/>
+    
+    <!--注册切面：通知-->
+    <bean id="myAdvice" class="com.cd.aop04.MyAfterReturningAdvice"/>
+    
+    <!--注册切面：顾问NameMatchMethodPointcutAdvisor-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+    <!--这里匹配的对象是简单方法名-->
+    <property name="advice" ref="myAdvice"/>
+    <!--想要通知目标对象的那个方法-->
+    <property name="mappedNames" value="*ir*"/>
+    <!--<property name="mappedName" value="doFirst"/>-->
+    <!--<property name="mappedNames" value="doFirst,doSecond"/>-->
+    </bean>
+    
+    <!--注册切面：顾问RegexpMethodPointcutAdvisor-->
+    <bean id="myAdvisor2" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"/>
+        <!--这里的正则表达式匹配的对象是全限定性方法名com.cd.aop04.ISomeService.doFirst-->
+        <property name="pattern" value=".*doFirst|.*doSecond"/>
+        <!--<property name="pattern" value=".*doFirst"/>-->
+        <!--<property name="patterns" value=".*doFirst,.*doSecond"/>-->
+        <!--<property name="pattern" value=".*S.*"/>-->
+    </bean>
+    
+    <!--生成代理对象-->
+    <bean id="serviceProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--指定目标对象-->
+        <property name="target" ref="someService"/>
+        <!--指定切面-->
+        <property name="interceptorNames" value="myAdvisor"/>
+        <!--<property name="interceptorNames" value="myAdvisor2"/>-->
+    </bean>
+    
+    <!--
+        当前代码存在两个问题：
+        1）若存在多个目标对象，就需要多次使用ProxFactoryBean来创建多个代理对象，这会使配置文件变得臃肿，不便于管理
+        2）用户真正想调用的是目标对象，而真正调用的确实代理对象，这不符合正常的逻辑
+        以上两个问题，均是因为ProxyFactoryBean类的功能太简单引起的
+    -->
+    
+</beans>

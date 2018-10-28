@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册service -->
+    <!--name可以包含各种字符，id必须满足XML的属性命名规范，大部分情况用id-->
+    <bean id="myService" class="com.cd.ba07.SomeServiceImpl"
+            init-method="setUp" destroy-method="tearDown">
+        <property name="adao" value="aaa"/>
+        <property name="bdao" value="bbb"/>
+    </bean>
+    
+    <bean class="com.cd.ba07.MyBeanPostProcessor"/>
+    
+</beans>

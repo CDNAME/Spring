@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册School -->
+    <bean id="mySchool" class="com.cd.di04.School">
+        <property name="name" value="北京大学"/>
+    </bean>
+    
+    <!-- 注册Student c标签表示当前对象的构造器参数construct-arg -->
+    <bean id="myStudent" class="com.cd.di04.Student"
+          c:name="陈登" c:age="22" c:school-ref="mySchool"/>
+</beans>

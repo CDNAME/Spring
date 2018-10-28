@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册School -->
+    <bean id="mySchool" class="com.cd.di02.School">
+        <property name="name" value="清华大学"/>
+    </bean>
+    
+    <!-- 注册Student -->
+    <bean id="myStudent" class="com.cd.di02.Student">
+        <constructor-arg name="name" value="陈登"/>
+        <constructor-arg name="age" value="22"/>
+        <constructor-arg name="school" ref="mySchool"/>
+        <!--
+        <constructor-arg index="0" value="陈登"/>
+        <constructor-arg index="1" value="22"/>
+        <constructor-arg index="2" ref="mySchool"/>
+        -->
+        <!--
+        <constructor-arg value="陈登"/>
+        <constructor-arg value="22"/>
+        <constructor-arg ref="mySchool"/>
+        -->
+    </bean>
+    
+</beans>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--注册目标对象-->
+    <bean id="someService" class="com.cd.aop05.SomeServiceImpl"/>
+    <bean id="someService2" class="com.cd.aop05.SomeServiceImpl"/>
+    
+    <!--注册切面：通知-->
+    <bean id="myAdvice" class="com.cd.aop05.MyAfterReturningAdvice"/>
+    
+    
+    <!--注册切面：顾问-->
+    <bean id="myAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"/>
+        <property name="mappedNames" value="doFirst"/>
+    </bean>
+    <bean id="myAdvisor2" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"/>
+        <property name="mappedNames" value="doSecond"/>
+    </bean>
+    
+    <!--注册默认Advisor自动代理生成器-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
+    
+    <!--注册Bean名称自动代理生成器-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames" value="someService"/>
+        <property name="interceptorNames" value="myAdvisor,myAdvisor2"/>
+        <!--<property name="interceptorNames" value="myAdvice"/>-->
+    </bean>
+    
+    <!--
+        当前代码存在两个问题：
+        1）若存在多个目标对象，就需要多次使用ProxFactoryBean来创建多个代理对象，这会使配置文件变得臃肿，不便于管理
+        2）用户真正想调用的是目标对象，而真正调用的确实代理对象，这不符合正常的逻辑
+        以上两个问题，均是因为ProxyFactoryBean类的功能太简单引起的
+        DefaultAdvisorAutoProxyCreator解决了ProxyFactoryBean存在的问题，但带来了新的问题
+        1）不能选择目标对象
+        2）不能选择切面类型，切面只能是顾问advisor
+        3）不能选择用哪个advisor，所有的advisor均将被作为切面织入到目标方法中
+        BeanNameAutoProxyCreator解决了DefaultAdvisorAutoProxyCreator的问题。
+    -->
+    
+</beans>

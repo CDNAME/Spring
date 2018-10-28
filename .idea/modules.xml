@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01-primary/01-primary.iml" filepath="$PROJECT_DIR$/01-primary/01-primary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02-beanAssemble/02-beanAssemble.iml" filepath="$PROJECT_DIR$/02-beanAssemble/02-beanAssemble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03-di/03-di.iml" filepath="$PROJECT_DIR$/03-di/03-di.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04-di-annotation/04-di-annotation.iml" filepath="$PROJECT_DIR$/04-di-annotation/04-di-annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05-aop-leadin/05-aop-leadin.iml" filepath="$PROJECT_DIR$/05-aop-leadin/05-aop-leadin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06-aop-leadin-02/06-aop-leadin-02.iml" filepath="$PROJECT_DIR$/06-aop-leadin-02/06-aop-leadin-02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07-aop/07-aop.iml" filepath="$PROJECT_DIR$/07-aop/07-aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/08-aspectj/08-aspectj.iml" filepath="$PROJECT_DIR$/08-aspectj/08-aspectj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09-jdbcTemplate/09-jdbcTemplate.iml" filepath="$PROJECT_DIR$/09-jdbcTemplate/09-jdbcTemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/10-byStock/10-byStock.iml" filepath="$PROJECT_DIR$/10-byStock/10-byStock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/11-byStock-txProxyFactoryBean/11-byStock-txProxyFactoryBean.iml" filepath="$PROJECT_DIR$/11-byStock-txProxyFactoryBean/11-byStock-txProxyFactoryBean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/12-byStock-annotation/12-byStock-annotation.iml" filepath="$PROJECT_DIR$/12-byStock-annotation/12-byStock-annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/13-byStock-aspectj/13-byStock-aspectj.iml" filepath="$PROJECT_DIR$/13-byStock-aspectj/13-byStock-aspectj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/14-spring-mybatis/14-spring-mybatis.iml" filepath="$PROJECT_DIR$/14-spring-mybatis/14-spring-mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/15-spring-web/15-spring-web.iml" filepath="$PROJECT_DIR$/15-spring-web/15-spring-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Proxy/Proxy.iml" filepath="$PROJECT_DIR$/Proxy/Proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Spring.iml" filepath="$PROJECT_DIR$/Spring.iml" />
+    </modules>
+  </component>
+</project>

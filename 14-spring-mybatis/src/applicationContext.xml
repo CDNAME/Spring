@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注册属性文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--注册数据源：C3P0连接池-->
+    <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+    <bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    
+    <!-- 生成Dao的代理对象 并注册Service-->
+    <!--
+    <bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="mySqlSessionFactory"/>
+        <property name="mapperInterface" value="com.cd.dao.StudentDao/>
+    </bean>
+    <bean id="studentService" class="com.cd.service.StudentServiceImpl">
+        <property name="dao" ref="studentDao"/>
+    </bean>
+    -->
+
+    <!-- 生成Dao的代理对象 当前配置会为指定的基本包中所有的接口生成代理对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"/>
+        <property name="basePackage" value="com.cd.dao"/>
+    </bean>
+    
+    <!--注册Service-->
+    <bean id="studentService" class="com.cd.service.StudentServiceImpl">
+        <!-- 这里的Dao的注入需要使用ref属性
+             若Dao的接口名的前两个字母是大写，则这里的值为接口的简单类名
+             若Dao的接口名的首字母是大写，第二个字母是小写，则这里的值为接口的简单类名，但首字母要小写
+        -->
+        <property name="dao" ref="studentDao"/>
+    </bean>
+</beans>
+
+<!--
+MapperFactoryBean一次只能为一个接口做代理，会造成大量冗余
+MapperScannerConfigurer可以为基本包中所有的接口生成代理对象，解决了这一问题
+-->

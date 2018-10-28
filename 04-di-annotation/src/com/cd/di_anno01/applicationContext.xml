@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描com.cd.di_anno01这个包及其子包-->
+    <context:component-scan base-package="com.cd.di_anno01"/>
+    <!--扫描com.cd这个包的子包-->
+    <!--<context:component-scan base-package="com.cd.*"/>-->
+
+    <!--
+    在基于注解的开发中，配置文件中的注入要比注解中的注入优先级要高，这样做有利于后期维护，不用重新编译。
+    但是要求Bean中要有set方法，因为XML的DI是调用Bean的set方法
+    -->
+    <!-- 注册School -->
+    <bean id="mySchool" class="com.cd.di_anno03.School">
+        <property name="name" value="清华大学"/>
+    </bean>
+
+    <!-- 注册Student -->
+    <bean id="myStudent" class="com.cd.di_anno03.Student">
+        <property name="name" value="陈登"/>
+        <property name="age" value="22"/>
+        <property name="school" ref="mySchool"/>
+    </bean>
+</beans>

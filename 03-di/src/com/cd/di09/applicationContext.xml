@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myPerson" class="com.cd.di09.Person">
+        <property name="pname" value="王二"/>
+        <property name="page" value="#{T(java.lang.Math).random() * 50}"/>
+    </bean>
+    
+    <bean id="myStudent" class="com.cd.di09.Student">
+        <property name="name" value="#{myPerson.pname}"/>
+        <property name="age" value="#{myPerson.computerAge()}"/>
+        <!--<property name="age" value="#{myPerson.page > 25 ? 25 : myPerson.page}"/>-->
+    </bean>
+    
+</beans>
